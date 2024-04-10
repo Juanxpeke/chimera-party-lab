@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ox73gvasy7y0"]
+
+[ext_resource type="Script" path="res://games/bomber_game/bomber_player.gd" id="1_xt1s7"]
+[ext_resource type="Script" path="res://scripts/player_component.gd" id="2_rar1i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c8drd"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d2j0t"]
+height = 0.5
+radius = 0.24
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ybbc0"]
+height = 0.5
+radius = 0.32
+
+[node name="BomberPlayer" type="CharacterBody3D"]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_xt1s7")
+
+[node name="PlayerComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_rar1i")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_c8drd")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_d2j0t")
+
+[node name="PushArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape3D" parent="PushArea"]
+shape = SubResource("CylinderShape3D_ybbc0")

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="GameInfo" load_steps=7 format=3 uid="uid://wk75iflvo1v6"]
+
+[ext_resource type="Texture2D" uid="uid://bcbnjudxibp0o" path="res://chimerin_lab/assets/chimerin.png" id="1_51u2n"]
+[ext_resource type="Script" path="res://scripts/game_input.gd" id="2_qkxro"]
+[ext_resource type="Script" path="res://scripts/game_info.gd" id="3_s684l"]
+
+[sub_resource type="Resource" id="Resource_l1ktx"]
+script = ExtResource("2_qkxro")
+inputs = 15
+description = "Walk"
+
+[sub_resource type="Resource" id="Resource_0fagf"]
+script = ExtResource("2_qkxro")
+inputs = 16
+description = "Pick Up / Throw"
+
+[sub_resource type="Resource" id="Resource_pv4vg"]
+script = ExtResource("2_qkxro")
+inputs = 32
+description = "Shield"
+
+[resource]
+script = ExtResource("3_s684l")
+name = "Bomber Game"
+description = "Pick up the bombs around the map and throw them at your enemies!"
+image = ExtResource("1_51u2n")
+inputs = Array[ExtResource("2_qkxro")]([SubResource("Resource_l1ktx"), SubResource("Resource_0fagf"), SubResource("Resource_pv4vg")])

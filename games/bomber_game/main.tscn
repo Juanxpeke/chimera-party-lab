@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci1wvmi63i2nt"]
+
+[ext_resource type="Script" path="res://games/bomber_game/main.gd" id="1_cvcen"]
+[ext_resource type="PackedScene" uid="uid://ox73gvasy7y0" path="res://games/bomber_game/bomber_player.tscn" id="2_6lym7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv4e5"]
+albedo_color = Color(1, 0.321569, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vhqdp"]
+material = SubResource("StandardMaterial3D_nv4e5")
+size = Vector3(32, 1, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_03iq4"]
+size = Vector3(24, 1, 24)
+
+[node name="BomberGame" type="Node3D"]
+script = ExtResource("1_cvcen")
+player_scene = ExtResource("2_6lym7")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 22.9787, 24)
+projection = 1
+fov = 37.8493
+size = 20.0
+
+[node name="Players" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Spawns" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Spawn" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
+
+[node name="Spawn2" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -8)
+
+[node name="Spawn3" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, -8)
+
+[node name="Spawn4" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 8)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_vhqdp")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_03iq4")
+
+[node name="GameTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -249.0
+offset_right = 249.0
+offset_bottom = 139.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"SmallMargin"
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallMargin"
+
+[node name="ScoreContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+columns = 8
+
+[node name="Score" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/ScoreContainer" instance_placeholder="res://games/my_game/ui/score.tscn"]
+layout_mode = 2
+
+[node name="Score2" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/ScoreContainer" instance_placeholder="res://games/my_game/ui/score.tscn"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
