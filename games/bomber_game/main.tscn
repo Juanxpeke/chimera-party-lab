@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ci1wvmi63i2nt"]
+[gd_scene load_steps=7 format=3 uid="uid://ci1wvmi63i2nt"]
 
 [ext_resource type="Script" path="res://games/bomber_game/main.gd" id="1_cvcen"]
 [ext_resource type="PackedScene" uid="uid://ox73gvasy7y0" path="res://games/bomber_game/bomber_player.tscn" id="2_6lym7"]
+[ext_resource type="PackedScene" uid="uid://drr0d8wvbo3ej" path="res://games/bomber_game/bomb.tscn" id="3_0yuso"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv4e5"]
 albedo_color = Color(1, 0.321569, 1, 1)
@@ -98,3 +99,6 @@ layout_mode = 2
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Bomb" parent="." instance=ExtResource("3_0yuso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20381, 0, 0.0714755)

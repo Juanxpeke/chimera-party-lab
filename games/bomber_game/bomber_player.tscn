@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ox73gvasy7y0"]
 
 [ext_resource type="Script" path="res://games/bomber_game/bomber_player.gd" id="1_xt1s7"]
-[ext_resource type="Script" path="res://scripts/player_component.gd" id="2_rar1i"]
+[ext_resource type="Script" path="res://components_lab/player_component.gd" id="2_7o27b"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c8drd"]
 size = Vector3(0.4, 0.4, 0.4)
@@ -21,7 +21,7 @@ script = ExtResource("1_xt1s7")
 
 [node name="PlayerComponent" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_rar1i")
+script = ExtResource("2_7o27b")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_c8drd")
