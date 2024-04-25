@@ -17,7 +17,11 @@ func _process(delta):
 
 # Called when a player interacts with the interactable component
 func _on_interacted(player_component: PlayerComponent):
-	var bomber_player = player_component.get_parent()
+	if sleeping:
+		return
+	
+	var bomber_player: BomberPlayer = player_component.get_parent()
+	bomber_player.take_bomb(self)
 
 # Public
 
