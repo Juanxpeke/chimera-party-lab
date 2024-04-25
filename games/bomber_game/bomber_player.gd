@@ -6,12 +6,16 @@ extends CharacterBody3D
 
 var push_direction: Vector3 = Vector3.ZERO
 var _pushers: Array[CharacterBody3D] = []
+var handled_bomb: Bomb = null
 
 @onready var player_component: PlayerComponent = %PlayerComponent
 @onready var push_area: Area3D = %PushArea
+@onready var bomb_handler: Marker3D = %BombHandler
+
 
 # Private
 
+# Called when the node enters the scene tree for the first time
 func _ready() -> void:
 	# animation_tree.active = true
 	push_area.body_entered.connect(_on_body_entered)
@@ -62,12 +66,30 @@ func _on_body_exited(body: Node) -> void:
 
 # Public
 
+#region Multiplayer
 func setup(player_data: PlayerData) -> void:
 	player_component.setup(player_data)
+#endregion
 
+#region Physics
 func start_pushing(pusher: CharacterBody3D) -> void:
 	_pushers.append(pusher)
 
 func stop_pushing(pusher: CharacterBody3D) -> void:
 	_pushers.erase(pusher)
+#endregion
+
+#region Bomb
+func take_bomb(bomb: Bomb):
+	if handled_bomb != null:
+		return
+	
+	bomb.activate()
+	
+	handled_bomb = bomb
+	handled_bomb.global_position = bomb_handler.global_position
+	handled_bomb.reparent(bomb_handler)
+#endregion
+
+
 

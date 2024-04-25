@@ -36,3 +36,6 @@ monitorable = false
 
 [node name="CollisionShape" type="CollisionShape3D" parent="PushArea"]
 shape = SubResource("CylinderShape3D_ybbc0")
+
+[node name="BombHandler" type="Marker3D" parent="."]
+unique_name_in_owner = true
