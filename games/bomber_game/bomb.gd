@@ -1,7 +1,7 @@
 class_name Bomb
 extends RigidBody3D
 
-var exploding: bool = false
+var activated: bool = false
 
 @onready var interactable_component: InteractableComponent3D = %InteractableComponent
 
@@ -17,7 +17,7 @@ func _process(delta):
 
 # Called when a player interacts with the interactable component
 func _on_interacted(player_component: PlayerComponent):
-	if sleeping:
+	if activated:
 		return
 	
 	var bomber_player: BomberPlayer = player_component.get_parent()
@@ -27,6 +27,6 @@ func _on_interacted(player_component: PlayerComponent):
 
 # Activates the bomb
 func activate():
-	interactable_component.disable()
-	sleeping = true
-	exploding = true
+	interactable_component.queue_free()
+	activated = true
+	freeze = true

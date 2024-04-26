@@ -14,6 +14,7 @@ func _ready() -> void:
 	if not player_scene:
 		Debug.log("No player scene selected")
 		return
+		
 	for i in Game.players.size():
 		var player_data = Game.players[i]
 		var player_inst = player_scene.instantiate()
@@ -26,3 +27,5 @@ func _ready() -> void:
 		score_container.add_child(score)
 	
 	game_timer.timeout.connect(func(): Game.end_game())
+	
+	InteractableManager.activate()

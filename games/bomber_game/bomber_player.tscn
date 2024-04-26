@@ -15,8 +15,6 @@ height = 0.5
 radius = 0.32
 
 [node name="BomberPlayer" type="CharacterBody3D"]
-collision_mask = 0
-motion_mode = 1
 script = ExtResource("1_xt1s7")
 
 [node name="PlayerComponent" type="Node" parent="."]
@@ -39,3 +37,4 @@ shape = SubResource("CylinderShape3D_ybbc0")
 
 [node name="BombHandler" type="Marker3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
