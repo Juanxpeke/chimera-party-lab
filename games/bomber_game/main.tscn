@@ -51,6 +51,9 @@ mesh = SubResource("BoxMesh_vhqdp")
 [node name="CollisionShape" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_03iq4")
 
+[node name="Bomb" parent="." instance=ExtResource("3_0yuso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20381, 2.39184, 0.0714755)
+
 [node name="GameTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 120.0
@@ -99,6 +102,3 @@ layout_mode = 2
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Bomb" parent="." instance=ExtResource("3_0yuso")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20381, 2.39184, 0.0714755)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://drr0d8wvbo3ej"]
+[gd_scene load_steps=8 format=3 uid="uid://drr0d8wvbo3ej"]
 
 [ext_resource type="Script" path="res://games/bomber_game/bomb.gd" id="1_t125m"]
 [ext_resource type="PackedScene" uid="uid://drcwfdi5vypqn" path="res://components_lab/interactable/interactable_component.tscn" id="2_vp2lm"]
@@ -7,15 +7,18 @@
 bounce = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cu25q"]
-radius = 0.3
+radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mubsi"]
 albedo_color = Color(0.160784, 0.160784, 0.160784, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_06pej"]
 material = SubResource("StandardMaterial3D_mubsi")
-radius = 0.3
-height = 0.6
+radius = 0.4
+height = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w1dxg"]
+radius = 2.0
 
 [node name="Bomb" type="RigidBody3D"]
 mass = 1.2
@@ -31,3 +34,9 @@ shape = SubResource("SphereShape3D_cu25q")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_06pej")
+
+[node name="ExplosionArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape" type="CollisionShape3D" parent="ExplosionArea"]
+shape = SubResource("SphereShape3D_w1dxg")

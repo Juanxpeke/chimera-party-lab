@@ -106,7 +106,6 @@ func process_collisions() -> void:
 		if collider is Bomb:
 			if collider.activated:
 				collider.explode()
-				die()
 				return
 			
 			collider.apply_central_impulse(-collision.get_normal() * rigid_bodies_push_force)
@@ -138,7 +137,7 @@ func take_bomb(bomb: Bomb):
 
 # Throws the handled bomb
 func throw_bomb():
-	var impulse_vector = (velocity.normalized() * 0.7 + Vector3.UP * 0.3) * velocity.length() 
+	var impulse_vector = (velocity.normalized() * 0.6 + Vector3.UP * 0.4) * velocity.length() 
 
 	handled_bomb.reparent(get_parent())
 	
@@ -153,7 +152,9 @@ func throw_bomb():
 
 # Dies
 func die() -> void:
-	pass
+	rotate(Vector3.LEFT, PI / 2)
+	
+	set_physics_process(false)
 
 #endregion
 
