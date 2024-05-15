@@ -65,7 +65,7 @@ func activate(bomber_player: BomberPlayer):
 # Explodes the bomb
 func explode():
 	for bomber_player in bomber_players_in_explosion:
-		bomb_owner.player_component.add_local_score(1)
+		#bomb_owner.player_component.add_local_score(1)
 		bomber_player.die()
 	
 	queue_free()
