@@ -10,7 +10,9 @@ var pushers: Array[CharacterBody3D] = []
 var rigid_bodies_push_force: float = 1.6
 
 var handled_bomb: Bomb = null
-var handled_bomb_throw_force: float = 4.0
+var handled_bomb_force: float = 3.6
+var handled_bomb_xz_impulse: float = 0.7
+var handled_bomb_y_impulse: float = 0.3 
 
 @onready var player_component: PlayerComponent = %PlayerComponent
 @onready var push_area: Area3D = %PushArea
@@ -25,8 +27,7 @@ func _ready() -> void:
 	
 	push_area.body_entered.connect(_on_body_entered)
 	push_area.body_exited.connect(_on_body_exited)
-	
-	set_process_input(false)
+
 
 # Called on each physics tick
 func _physics_process(delta: float) -> void:
@@ -67,12 +68,10 @@ func _physics_process(delta: float) -> void:
 
 # Called on an input event trigger
 func _input(event: InputEvent) -> void:
-	if handled_bomb == null:
-		return
-		
-	if event.is_action_pressed(player_component.action_a):
+	if handled_bomb != null and event.is_action_pressed(player_component.action_a):
 		throw_bomb()
-		set_process_input(false)
+	elif event.is_action_pressed(player_component.action_b):
+		activate_bomb_shield()
 
 # Called then a body enters the push area
 func _on_body_entered(body: Node) -> void:
@@ -93,6 +92,10 @@ func _on_body_exited(body: Node) -> void:
 func setup(player_data: PlayerData) -> void:
 	player_component.setup(player_data)
 	
+# Updates the player color
+func update_color() -> void:
+	print(player_component.data.primary_color)
+
 #endregion
 
 #region Physics
@@ -103,11 +106,7 @@ func process_collisions() -> void:
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		if collider is Bomb:
-			if collider.activated:
-				collider.explode()
-				return
-			
+		if collider is RigidBody3D:
 			collider.apply_central_impulse(-collision.get_normal() * rigid_bodies_push_force)
 
 # Adds a pusher to the pushers array
@@ -123,28 +122,30 @@ func stop_pushing(pusher: CharacterBody3D) -> void:
 #region Bomb
 
 # Takes the given bomb
-func take_bomb(bomb: Bomb):
+func take_bomb(bomb: Bomb) -> void:
 	if handled_bomb != null:
 		return
 	
-	bomb.activate()
+	bomb.activate(self)
+	bomb.reparent(bomb_handler)
+	bomb.global_position = bomb_handler.global_position
 	
 	handled_bomb = bomb
-	handled_bomb.global_position = bomb_handler.global_position
-	handled_bomb.reparent(bomb_handler)
-	
-	set_process_input(true)
 
 # Throws the handled bomb
-func throw_bomb():
-	var impulse_vector = (velocity.normalized() * 0.6 + Vector3.UP * 0.4) * velocity.length() 
+func throw_bomb() -> void:
+	var impulse_vector = (velocity.normalized() * handled_bomb_xz_impulse + Vector3.UP * handled_bomb_y_impulse) * velocity.length() 
 
 	handled_bomb.reparent(get_parent())
 	
 	handled_bomb.freeze = false
-	handled_bomb.apply_central_impulse(impulse_vector * handled_bomb_throw_force)
+	handled_bomb.apply_central_impulse(impulse_vector * handled_bomb_force)
 	
 	handled_bomb = null
+
+# Activates the bomb shield
+func activate_bomb_shield() -> void:
+	pass
 
 #endregion
 

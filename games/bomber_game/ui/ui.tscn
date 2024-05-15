@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://df64gjchq21so"]
+
+[ext_resource type="PackedScene" uid="uid://cbcoeleb7kf2s" path="res://games/my_game/ui/score.tscn" id="1_mx1bl"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -249.0
+offset_right = 249.0
+offset_bottom = 139.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"SmallMargin"
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallMargin"
+
+[node name="ScoreContainer" type="GridContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+columns = 8
+
+[node name="Score" parent="MarginContainer/PanelContainer/MarginContainer/ScoreContainer" instance=ExtResource("1_mx1bl")]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

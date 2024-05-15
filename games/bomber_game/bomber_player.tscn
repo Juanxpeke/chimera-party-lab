@@ -1,13 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://ox73gvasy7y0"]
 
 [ext_resource type="Script" path="res://games/bomber_game/bomber_player.gd" id="1_xt1s7"]
-[ext_resource type="Script" path="res://components_lab/player_component.gd" id="2_7o27b"]
+[ext_resource type="PackedScene" uid="uid://m1kq4qbh5q0r" path="res://components_lab/player_component.tscn" id="2_nwh68"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_c8drd"]
-size = Vector3(0.4, 0.4, 0.4)
+[sub_resource type="CylinderMesh" id="CylinderMesh_durdi"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_d2j0t"]
-height = 0.5
+height = 1.0
 radius = 0.24
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ybbc0"]
@@ -17,14 +19,15 @@ radius = 0.32
 [node name="BomberPlayer" type="CharacterBody3D"]
 script = ExtResource("1_xt1s7")
 
-[node name="PlayerComponent" type="Node" parent="."]
+[node name="PlayerComponent" parent="." instance=ExtResource("2_nwh68")]
 unique_name_in_owner = true
-script = ExtResource("2_7o27b")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_c8drd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_durdi")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CylinderShape3D_d2j0t")
 
 [node name="PushArea" type="Area3D" parent="."]
@@ -37,4 +40,4 @@ shape = SubResource("CylinderShape3D_ybbc0")
 
 [node name="BombHandler" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)

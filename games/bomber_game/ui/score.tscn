@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://037uob4sfljo"]
 
-[ext_resource type="Script" path="res://games/my_game/ui/score.gd" id="1_pa73q"]
+[ext_resource type="Script" path="res://games/bomber_game/ui/score.gd" id="1_4kx8g"]
 
 [node name="Score" type="HBoxContainer"]
 offset_right = 211.0
 offset_bottom = 75.0
-script = ExtResource("1_pa73q")
+script = ExtResource("1_4kx8g")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(75, 75)
